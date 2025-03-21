@@ -10,22 +10,36 @@ import java.util.List;
 @Service
 public class StudentService {
 
+
     @Autowired
     StudentRepo studentRepo;
 
     public List<Student> getAllStudent(){
-        return studentRepo.findAll();
+        List<Student> students = studentRepo.findAll();
+        for(Student student:students){
+            System.out.println(student.getStuName());
+        }
+        return students;
     }
 
-    public Student getSrudentById(int rollno){
-        return studentRepo.findById(rollno).get();
+    public void addStudent(Student student){
+        studentRepo.save(student);
     }
 
-    public Student updateStudentById(Student student){
-        return studentRepo.save(student);
+    public Student getStudentById(int rollno){
+        return studentRepo.findById(rollno).orElse(null);
+    }
+
+
+    public void updateStudentById(Student student){
+        studentRepo.save(student);
     }
 
     public void deleteStudentById(int rollno) {
         studentRepo.deleteById(rollno);
+    }
+
+    public void deleteAllstudents() {
+        studentRepo.deleteAll();
     }
 }

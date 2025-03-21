@@ -15,17 +15,16 @@ import jakarta.persistence.*;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Roll_Number")
-    private int rollno;
+    private int id;
 
-    @Column(name = "Student_Name")
     private String stuName;
 
-    @Column(name = "Gender")
     private String gender;
 
-    @Column(name = "Email")
     private String email;
-
-
+    public Student(String stuName, String gender, String email) {
+        this.stuName = stuName;
+        this.gender = gender;
+        this.email = email;
+    }
 }
