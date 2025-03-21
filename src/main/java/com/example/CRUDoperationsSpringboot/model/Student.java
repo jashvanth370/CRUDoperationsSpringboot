@@ -27,4 +27,5 @@ public class Student {
     @Column(name = "Email")
     private String email;
 
+
 }
