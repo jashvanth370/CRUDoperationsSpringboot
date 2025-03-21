@@ -47,4 +47,9 @@ public class StudentController {
         studentService.deleteAllstudents();
         return "Delete All Students";
     }
+
+    @GetMapping("students/gender/{gender}")
+    public List<Student> getStudentbyGender(@PathVariable String gender){
+        return studentService.getStudentByGender(gender);
+    }
 }

@@ -42,4 +42,8 @@ public class StudentService {
     public void deleteAllstudents() {
         studentRepo.deleteAll();
     }
+
+    public List<Student> getStudentByGender(String gender) {
+        return studentRepo.findByGender(gender);
+    }
 }
