@@ -11,20 +11,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://127.0.0.1:5500") // Allow requests from your frontend
 public class StudentController {
 
 
     @Autowired
     StudentService studentService;
 
-    @GetMapping("/students")
+    @GetMapping("/students/get")
     public List<Student> getAllStudents(){
         return studentService.getAllStudent();
     }
 
-    @PostMapping("/students/add")
-    public ResponseEntity<String> addStudent(@RequestBody Student student){
-        studentService.addStudent(student);
+    @PostMapping("/students/register")
+    public ResponseEntity<String> addStudent(@RequestParam("stuName") String stuName,
+                                             @RequestParam("gender") String gender,
+                                             @RequestParam("email") String email){
+        studentService.addStudent(stuName,gender,email);
         return new ResponseEntity<>("Added....",HttpStatus.CREATED);
     }
 

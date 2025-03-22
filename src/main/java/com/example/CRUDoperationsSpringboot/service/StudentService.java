@@ -22,10 +22,6 @@ public class StudentService {
         return students;
     }
 
-    public void addStudent(Student student){
-        studentRepo.save(student);
-    }
-
     public Student getStudentById(int rollno){
         return studentRepo.findById(rollno).orElse(new Student());
     }
@@ -49,5 +45,10 @@ public class StudentService {
 
     public List<Student> getStudentByGenderAndstuName(String gender,String stuName) {
         return studentRepo.findByGenderAndStuname(gender,stuName);
+    }
+
+    public void addStudent(String stuName, String gender, String email) {
+        Student student = new Student(stuName,gender,email);
+        studentRepo.save(student);
     }
 }
