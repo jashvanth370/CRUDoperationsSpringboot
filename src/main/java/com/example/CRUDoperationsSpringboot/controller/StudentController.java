@@ -4,6 +4,8 @@ import com.example.CRUDoperationsSpringboot.model.Student;
 import com.example.CRUDoperationsSpringboot.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,14 +23,18 @@ public class StudentController {
     }
 
     @PostMapping("/students/add")
-    public String addStudent(@RequestBody Student student){
+    public ResponseEntity<String> addStudent(@RequestBody Student student){
         studentService.addStudent(student);
-        return "Added Successfully";
+        return new ResponseEntity<>("Added....",HttpStatus.CREATED);
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudentById(@PathVariable("id") int id){
-        return studentService.getStudentById(id);
+    public ResponseEntity<Student> getStudentById(@PathVariable("id") int id){
+        Student student= studentService.getStudentById(id);
+        if(student==null){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(student,HttpStatus.OK);
     }
 
     @PutMapping("students/update/{id}")

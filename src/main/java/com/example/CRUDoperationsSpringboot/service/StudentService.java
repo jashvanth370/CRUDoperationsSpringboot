@@ -27,7 +27,7 @@ public class StudentService {
     }
 
     public Student getStudentById(int rollno){
-        return studentRepo.findById(rollno).orElse(null);
+        return studentRepo.findById(rollno).orElse(new Student());
     }
 
 
